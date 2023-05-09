@@ -11,14 +11,8 @@ public class App {
             config = configurations.properties("config.properties");
             String OPENAI_API_KEY = config.getString("OPENAI_API_KEY");
             var chatGPTClient = new ChatGPTClient();
-            String perguntaCriada = chatGPTClient.criarPergunta(
-                OPENAI_API_KEY,
-                "Java",
-                "Múltipla Escolha",
-                "Fácil",
-                "Qual o resultado da expressão 2 + 2?"
-            );
-            JOptionPane.showMessageDialog(null, perguntaCriada);
+            String resposta = chatGPTClient.responderPergunta(OPENAI_API_KEY, "Qual a capital do Brasil?");
+            JOptionPane.showMessageDialog(null, resposta);
         }
         catch (Exception e) {
             e.printStackTrace();

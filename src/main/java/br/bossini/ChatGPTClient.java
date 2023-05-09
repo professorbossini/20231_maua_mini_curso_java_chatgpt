@@ -27,7 +27,7 @@ public class ChatGPTClient {
     RequisicaoChatGPT requisicao = new RequisicaoChatGPT("text-davinci-003", prompt, 100);
     Gson gson = new Gson();
     RequestBody requestBody = RequestBody.create(gson.toJson(requisicao), MediaType.parse("application/json"));
-    
+
     OkHttpClient client = new OkHttpClient();
 
     Request request = new Request.Builder()
@@ -37,6 +37,29 @@ public class ChatGPTClient {
         .post(requestBody)
         .build();
 
+    Response response = client.newCall(request).execute();
+    RespostaChatGPT resposta = gson.fromJson(response.body().string(), RespostaChatGPT.class);
+    String completion = resposta.getChoices().get(0).getText().trim();
+    return completion;
+  }
+
+  public String responderPergunta(
+      String OPENAI_API_KEY,
+      String pergunta) throws Exception{
+    String prompt = "Responda a seguinte pergunta: %s".formatted(pergunta);
+    RequisicaoChatGPT requisicao = new RequisicaoChatGPT("text-davinci-003", prompt, 100);
+    
+    Gson gson = new Gson();
+    RequestBody requestBody = RequestBody.create(gson.toJson(requisicao), MediaType.parse("application/json"));
+    
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+        .url("https://api.openai.com/v1/completions")
+        .addHeader("Content-Type", "application/json")
+        .addHeader("Authorization", "Bearer " + OPENAI_API_KEY)
+        .post(requestBody)
+        .build();
+        
     Response response = client.newCall(request).execute();
     RespostaChatGPT resposta = gson.fromJson(response.body().string(), RespostaChatGPT.class);
     String completion = resposta.getChoices().get(0).getText().trim();
