@@ -33,12 +33,7 @@
       <version>4.11.0</version>
     </dependency>
 
-    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
-    <dependency>
-      <groupId>com.google.code.gson</groupId>
-      <artifactId>gson</artifactId>
-      <version>2.10.1</version>
-    </dependency>
+    
 
 
     <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-configuration2 -->
@@ -64,6 +59,13 @@
       <!-- inclusa somente em tem de compilação -->
       <!-- não usamos compile pois é a padrão e seria inclusa em todas as fases -->
       <scope>provided</scope>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
     </dependency>
     
   </dependencies>
